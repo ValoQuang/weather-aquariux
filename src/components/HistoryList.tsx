@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { IoSearchSharp, IoTrashSharp } from "react-icons/io5";
 import { getTimeLocal } from "../utils/getTimeLocal";
-
-type HistoryDataType = {
-  historyData: string[] | null;
-  setHistoryData: React.Dispatch<React.SetStateAction<string[] | null>>;
-  loading: boolean;
-  handleSearch:(name: string) => void;
-};
+import { HistoryDataType } from "../types/types";
 
 const HistoryList = ({
   historyData,

@@ -1,11 +1,5 @@
 import axios, { AxiosError } from "axios";
-
-type WeatherData = any; // Define type for weather data as needed
-
-export interface WeatherResponse {
-  data: WeatherData | null;
-  error: string | null;
-}
+import { WeatherResponse } from "../types/types";
 
 export const fetchWeatherData = async (
   loc: string,

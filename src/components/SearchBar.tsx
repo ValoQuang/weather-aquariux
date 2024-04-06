@@ -1,13 +1,5 @@
+import { SearchbarType } from "../types/types";
 import Button from "../ui-shared/Button";
-
-type SearchbarType = {
-  location: string;
-  setLocation: (props: string) => void;
-  handleSearch: (name: string) => void;
-  handleClear: () => void;
-  handleDarkMode?: () => void;
-  darkMode: boolean;
-};
 
 const SearchBar = ({
   location,

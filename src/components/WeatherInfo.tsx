@@ -2,30 +2,7 @@ import { convertTemperature } from "../utils/convertTemperature";
 import { IoWarning } from "react-icons/io5";
 import sun from "../assets/sun.png";
 import cloud from "../assets/cloud.png";
-
-interface WeatherData {
-  name: string;
-  sys: {
-    country: string;
-  };
-  weather: {
-    main: string;
-    description: string;
-  }[];
-  main: {
-    temp_min: number;
-    temp_max: number;
-    humidity: number;
-  };
-  // Add other properties as needed
-}
-
-type WeatherInfoType = {
-  weatherData: WeatherData | null;
-  error: string | undefined;
-  loading: boolean;
-  darkMode: boolean;
-};
+import { WeatherInfoType } from "../types/types";
 
 const WeatherInfo = ({
   weatherData,
@@ -41,7 +18,7 @@ const WeatherInfo = ({
   return (
     <div
       style={{
-        borderColor: !darkMode ? "white" : "black",
+        borderColor: darkMode ? "white" : "black",
         transition: "background-color 1s ease",
       }}
       className="border-[1px] px-10 flex flex-col items-center w-full h-full max-lg:text-sm max-lg:px-1 rounded-3xl"

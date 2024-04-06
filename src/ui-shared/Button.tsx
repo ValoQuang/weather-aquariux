@@ -1,8 +1,4 @@
-type ButtonType = {
-    darkMode: boolean;
-    onClick?: () => void;
-    title: string;
-}
+import { ButtonType } from "../types/types";
 
 const Button = ({ title, darkMode, onClick }: ButtonType) => {
   return (
