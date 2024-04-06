@@ -12,6 +12,7 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Nullable<any>>(null);
   const [historyData, setHistoryData] = useState<string[] | null>([]);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const handleSearch = async (location: string) => {
     setLoading(true);
@@ -36,7 +37,7 @@ function App() {
 
   const handleClear = () => {
     setLocation("");
-    setWeatherData(null);
+    setError(null);
   };
 
   const handleHistoryData = (newItem: string) => {
@@ -47,28 +48,53 @@ function App() {
     }
   };
 
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   const memoizedWeatherInfo = useMemo(
     () => (
-      <WeatherInfo loading={loading} error={error} weatherData={weatherData} />
+      <WeatherInfo
+        darkMode={darkMode}
+        loading={loading}
+        error={error}
+        weatherData={weatherData}
+      />
     ),
-    [weatherData, error, loading]
+    [weatherData, error, darkMode, loading]
   );
 
   return (
-    <div className="overflow-auto mx-72 max-md:mx-0 bg-slate-100 h-screen border-solid border-[1px] rounded-md border-black px-10 flex flex-col gap-10">
-      <SearchBar
-        location={location}
-        setLocation={setLocation}
-        handleSearch={handleSearch}
-        handleClear={handleClear}
-      />
-      {memoizedWeatherInfo}
-      <HistoryList
-        loading={loading}
-        handleSearch={handleSearch}
-        setHistoryData={setHistoryData}
-        historyData={historyData}
-      />
+    <div
+      style={{
+        backgroundColor: !darkMode ? "white" : "#374151",
+        color: !darkMode ? "#374151" : "white",
+        transition: "background-color 1s ease",
+        fontFamily: "Open Sans, sans-serif",
+      }}
+    >
+      <div
+        style={{
+          borderColor: darkMode ? "white" : "#374151",
+        }}
+        className="overflow-auto items-center mx-72 max-lg:mx-0 h-screen border-solid border-[1px] rounded-md px-10 flex flex-col gap-10"
+      >
+        <SearchBar
+          location={location}
+          setLocation={setLocation}
+          handleSearch={handleSearch}
+          handleClear={handleClear}
+          handleDarkMode={handleDarkMode}
+          darkMode={darkMode}
+        />
+        {memoizedWeatherInfo}
+        <HistoryList
+          loading={loading}
+          handleSearch={handleSearch}
+          setHistoryData={setHistoryData}
+          historyData={historyData}
+        />
+      </div>
     </div>
   );
 }

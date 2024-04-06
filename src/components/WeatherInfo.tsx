@@ -1,5 +1,7 @@
 import { convertTemperature } from "../utils/convertTemperature";
 import { IoWarning } from "react-icons/io5";
+import sun from "../assets/sun.png";
+import cloud from "../assets/cloud.png";
 
 interface WeatherData {
   name: string;
@@ -22,16 +24,28 @@ type WeatherInfoType = {
   weatherData: WeatherData | null;
   error: string | undefined;
   loading: boolean;
+  darkMode: boolean;
 };
 
-const WeatherInfo = ({ weatherData, error, loading }: WeatherInfoType) => {
+const WeatherInfo = ({
+  weatherData,
+  error,
+  loading,
+  darkMode,
+}: WeatherInfoType) => {
   const convertTempMin =
     weatherData && convertTemperature(weatherData.main.temp_min);
   const convertTempMax =
     weatherData && convertTemperature(weatherData.main.temp_max);
 
   return (
-    <div className="px-10 bg-slate-200 w-full h-full max-lg:text-sm max-lg:px-1 rounded-md">
+    <div
+      style={{
+        borderColor: !darkMode ? "white" : "black",
+        transition: "background-color 1s ease",
+      }}
+      className="border-[1px] px-10 flex flex-col items-center w-full h-full max-lg:text-sm max-lg:px-1 rounded-3xl"
+    >
       {loading ? (
         <>Loading ...</>
       ) : (
@@ -43,22 +57,30 @@ const WeatherInfo = ({ weatherData, error, loading }: WeatherInfoType) => {
           )}
           {/* Display weather information here */}
           {weatherData && !error && (
-            <div className="flex flex-col text-sm gap-5">
-              <p>
-                Weather for {weatherData.name}, {weatherData.sys.country}
-              </p>
-              <div className="text-3xl font-extrabold">
-                {weatherData.weather[0].main}
-              </div>
-              <div className="flex flex-col gap-2">
-                <p>City: {weatherData.name}</p>
-                <p>Description: {weatherData.weather[0].description}</p>
+            <div className="flex justify-between gap-5">
+              <div className="flex flex-col text-sm gap-5">
                 <p>
-                  Temperature: {convertTempMin} °C ≈ {convertTempMax} °C
+                  Weather for {weatherData.name}, {weatherData.sys.country}
                 </p>
-                <p>Humidity: {weatherData.main.humidity} %</p>
-                <p>Time: </p>
+                <div className="text-3xl font-extrabold">
+                  {weatherData.weather[0].main}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p>City: {weatherData.name}</p>
+                  <p>Description: {weatherData.weather[0].description}</p>
+                  <p>
+                    Temperature: {convertTempMin} °C ≈ {convertTempMax} °C
+                  </p>
+                  <p>Humidity: {weatherData.main.humidity} %</p>
+                  <p>Time: </p>
+                </div>
               </div>
+
+              <img
+                className="max-lg:w-32 max-lg:h-32 w-48 h-48"
+                src={weatherData.weather[0].main ? cloud : sun}
+                alt="sun"
+              />
             </div>
           )}
         </>

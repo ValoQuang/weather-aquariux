@@ -33,7 +33,7 @@ const HistoryList = ({
   };
 
   return (
-    <div className="h-full">
+    <div className="w-full h-full">
       <div className="text-2xl max-lg:text-xs py-2 border-solid border-b-[1px] border-black font-extrabold">
         History
       </div>
@@ -46,7 +46,7 @@ const HistoryList = ({
             <>
               {currentItems &&
                 currentItems.map((name: string, index: number) => (
-                  <div className="text-lg flex justify-between border-solid border-b-2 mt-5">
+                  <div className="text-lg flex justify-between border-solid border-b-2 mt-5 transition-transform z-50 hover:translate-y-[-5px]">
                     <li key={index} className="max-lg:text-sm">{name}</li>
                     <div className="flex gap-1 max-lg:text-sm items-center">
                       <p>{getTimeLocal(Date.now())}</p>

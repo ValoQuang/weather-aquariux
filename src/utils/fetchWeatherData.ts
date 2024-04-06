@@ -13,7 +13,7 @@ export const fetchWeatherData = async (
 ): Promise<WeatherResponse> => {
   try {
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${id}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=f052bde16f681ed8533ca7f58830b1de`
     );
 
     // Check if response status code is 404

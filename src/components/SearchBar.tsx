@@ -1,8 +1,12 @@
+import Button from "../ui-shared/Button";
+
 type SearchbarType = {
   location: string;
   setLocation: (props: string) => void;
   handleSearch: (name: string) => void;
   handleClear: () => void;
+  handleDarkMode?: () => void;
+  darkMode: boolean;
 };
 
 const SearchBar = ({
@@ -10,32 +14,36 @@ const SearchBar = ({
   setLocation,
   handleSearch,
   handleClear,
+  handleDarkMode,
+  darkMode,
 }: SearchbarType) => {
   return (
     <>
-      <div className="text-2xl max-lg:text-xs py-2 bordery-solid border-b-[1px] border-black font-extrabold">
+      <div
+        style={{
+          borderColor: darkMode ? "white" : "#374151",
+        }}
+        className="text-2xl w-full max-lg:text-xs py-2 bordery-solid border-b-[1px] border-black font-extrabold"
+      >
         Today's Weather App
       </div>
-      <div className="flex gap-5 -mt-5 max-lg:flex-col">
+      <div className="flex gap-5 -mt-5">
         <input
-          className="px-2 border-2 border-black border-solid rounded-sm"
+          style={{
+            borderColor: darkMode ? "white" : "#374151",
+          }}
+          className="px-2 border-[1px] text-black border-black border-solid rounded-sm"
           type="text"
           placeholder="Enter location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />{" "}
-        <button
-          className="px-2 border-2 border-black border-solid rounded-sm"
-          onClick={() => handleSearch(location)}
-        >
-          Search
-        </button>
-        <button
-          className="px-2 border-2 border-black border-solid rounded-sm"
-          onClick={handleClear}
-        >
-          Clear Input
-        </button>
+
+        <Button title="Search" darkMode={darkMode} onClick={() =>handleSearch(location)}/>
+       
+        <Button title="Clear input" darkMode={darkMode} onClick={handleClear}/>
+
+        <Button title={`Toggle ${!darkMode ? "Dark" : "Light"} mode`} darkMode={darkMode} onClick={handleDarkMode}/>
       </div>
     </>
   );
