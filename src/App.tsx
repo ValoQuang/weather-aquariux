@@ -46,22 +46,13 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    if (loading) {
-      <div>Loading ...</div>;
-    }
-    if (weatherData && error === null) {
-      setLoading(false);
-    }
-  }, [weatherData, location]);
-
   const memoizedWeatherInfo = useMemo(
-    () => <WeatherInfo error={error} weatherData={weatherData} />,
-    [weatherData, error]
+    () => <WeatherInfo loading={loading} error={error} weatherData={weatherData} />,
+    [weatherData, error, loading]
   );
 
   return (
-    <div className="overflow-auto mx-48 bg-slate-100 h-screen border-solid border-[1px] rounded-md border-black px-10 flex flex-col gap-10">
+    <div className="overflow-auto mx-48 max-md:mx-0 bg-slate-100 h-screen border-solid border-[1px] rounded-md border-black px-10 flex flex-col gap-10">
       <SearchBar
         location={location}
         setLocation={setLocation}
@@ -69,7 +60,7 @@ function App() {
         handleClear={handleClear}
       />
       {memoizedWeatherInfo}
-      <HistoryList setHistoryData={setHistoryData} historyData={historyData} />
+      <HistoryList loading={loading} setHistoryData={setHistoryData} historyData={historyData} />
     </div>
   );
 }
