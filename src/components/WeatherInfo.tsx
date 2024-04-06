@@ -31,7 +31,7 @@ const WeatherInfo = ({ weatherData, error, loading }: WeatherInfoType) => {
     weatherData && convertTemperature(weatherData.main.temp_max);
 
   return (
-    <div className="px-10 bg-slate-200 w-full h-full max-lg:text-sm rounded-md">
+    <div className="px-10 bg-slate-200 w-full h-full max-lg:text-sm max-lg:px-1 rounded-md">
       {loading ? (
         <>Loading ...</>
       ) : (

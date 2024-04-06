@@ -1,7 +1,7 @@
 type SearchbarType = {
   location: string;
   setLocation: (props: string) => void;
-  handleSearch: () => void;
+  handleSearch: (name: string) => void;
   handleClear: () => void;
 };
 
@@ -26,7 +26,7 @@ const SearchBar = ({
         />{" "}
         <button
           className="px-2 border-2 border-black border-solid rounded-sm"
-          onClick={handleSearch}
+          onClick={() => handleSearch(location)}
         >
           Search
         </button>

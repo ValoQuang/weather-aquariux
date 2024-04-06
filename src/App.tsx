@@ -13,7 +13,7 @@ function App() {
   const [error, setError] = useState<Nullable<any>>(null);
   const [historyData, setHistoryData] = useState<string[] | null>([]);
 
-  const handleSearch = async () => {
+  const handleSearch = async (location: string) => {
     setLoading(true);
     const trimmedLocation = location.trim();
     const apiKey = process.env.WEATHER_API_KEY;
@@ -26,6 +26,7 @@ function App() {
       if (data) {
         setWeatherData(data);
         setError(null);
+        setLocation("");
       }
       if (!data) setError(error);
       if (!error && data) handleHistoryData(data.name);
@@ -47,12 +48,14 @@ function App() {
   };
 
   const memoizedWeatherInfo = useMemo(
-    () => <WeatherInfo loading={loading} error={error} weatherData={weatherData} />,
+    () => (
+      <WeatherInfo loading={loading} error={error} weatherData={weatherData} />
+    ),
     [weatherData, error, loading]
   );
 
   return (
-    <div className="overflow-auto mx-48 max-md:mx-0 bg-slate-100 h-screen border-solid border-[1px] rounded-md border-black px-10 flex flex-col gap-10">
+    <div className="overflow-auto mx-72 max-md:mx-0 bg-slate-100 h-screen border-solid border-[1px] rounded-md border-black px-10 flex flex-col gap-10">
       <SearchBar
         location={location}
         setLocation={setLocation}
@@ -60,7 +63,12 @@ function App() {
         handleClear={handleClear}
       />
       {memoizedWeatherInfo}
-      <HistoryList loading={loading} setHistoryData={setHistoryData} historyData={historyData} />
+      <HistoryList
+        loading={loading}
+        handleSearch={handleSearch}
+        setHistoryData={setHistoryData}
+        historyData={historyData}
+      />
     </div>
   );
 }
