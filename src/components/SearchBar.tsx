@@ -1,10 +1,8 @@
-import { IoWarning } from "react-icons/io5";
 
 type SearchbarType = {
   location: string;
   setLocation: (props: string) => void;
   handleSearch: () => void;
-  error: string | undefined;
   handleClear: () => void;
 };
 
@@ -12,7 +10,6 @@ const SearchBar = ({
   location,
   setLocation,
   handleSearch,
-  error,
   handleClear,
 }: SearchbarType) => {
   return (
@@ -43,11 +40,6 @@ const SearchBar = ({
             Clear Input
           </button>
         </div>
-        {error && (
-          <div className="bg-red-400 gap-1 items-center flex p-2 rounded-md">
-            <IoWarning /> {error}
-          </div>
-        )}
       </div>
     </>
   );

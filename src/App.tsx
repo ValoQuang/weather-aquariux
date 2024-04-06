@@ -1,4 +1,3 @@
-import "./App.css";
 import SearchBar from "./components/SearchBar";
 import HistoryList from "./components/HistoryList";
 import WeatherInfo from "./components/WeatherInfo";
@@ -29,8 +28,8 @@ function App() {
         setError(null);
       }
       if (!data) setError(error);
-      if (!error && data)
-        handleHistoryData(`${data.name}, ${data.sys.country}`);
+      if (!error && data) handleHistoryData(data.name);
+      setLoading(false);
     }
   };
 
@@ -38,6 +37,7 @@ function App() {
     setLocation("");
     setWeatherData(null);
   };
+
   const handleHistoryData = (newItem: string) => {
     if (historyData === null) {
       setHistoryData([newItem]);
@@ -53,11 +53,11 @@ function App() {
     if (weatherData && error === null) {
       setLoading(false);
     }
-  }, [weatherData]);
+  }, [weatherData, location]);
 
   const memoizedWeatherInfo = useMemo(
-    () => <WeatherInfo weatherData={weatherData} />,
-    [weatherData]
+    () => <WeatherInfo error={error} weatherData={weatherData} />,
+    [weatherData, error]
   );
 
   return (
@@ -67,10 +67,9 @@ function App() {
         setLocation={setLocation}
         handleSearch={handleSearch}
         handleClear={handleClear}
-        error={error}
       />
       {memoizedWeatherInfo}
-      <HistoryList historyData={historyData} />
+      <HistoryList setHistoryData={setHistoryData} historyData={historyData} />
     </div>
   );
 }
