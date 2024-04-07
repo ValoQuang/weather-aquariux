@@ -3,6 +3,7 @@ import { IoWarning } from "react-icons/io5";
 import sun from "../assets/sun.png";
 import cloud from "../assets/cloud.png";
 import { WeatherInfoType } from "../types/types";
+import { getTimeData } from "../utils/getTimeData";
 
 const WeatherInfo = ({
   weatherData,
@@ -14,6 +15,7 @@ const WeatherInfo = ({
     weatherData && convertTemperature(weatherData.main.temp_min);
   const convertTempMax =
     weatherData && convertTemperature(weatherData.main.temp_max);
+  const displayTime = weatherData && getTimeData(weatherData.timezone);
 
   return (
     <div
@@ -49,7 +51,7 @@ const WeatherInfo = ({
                     Temperature: {convertTempMin} °C ≈ {convertTempMax} °C
                   </p>
                   <p>Humidity: {weatherData.main.humidity} %</p>
-                  <p>Time at local position: </p>
+                  <p>Time at local position: {displayTime}</p>
                 </div>
               </div>
 

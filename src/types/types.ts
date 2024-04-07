@@ -12,6 +12,7 @@ interface WeatherData {
     temp_max: number;
     humidity: number;
   };
+  timezone: number;
 }
 export type Nullable<T> = T | null;
 
