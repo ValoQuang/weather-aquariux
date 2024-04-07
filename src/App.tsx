@@ -16,14 +16,13 @@ function App() {
   const handleSearch = async (location: string) => {
     setLoading(true);
     const trimmedLocation = location.trim();
-    const apiKey = process.env.WEATHER_API_KEY;
     const searchTime = new Date().toLocaleString();
 
     if (!trimmedLocation) {
       setError("Please enter location or country");
       setLoading(false);
     } else {
-      const { data, error } = await fetchWeatherData(trimmedLocation, apiKey);
+      const { data, error } = await fetchWeatherData(trimmedLocation);
       if (data) {
         setWeatherData(data);
         setError(null);
