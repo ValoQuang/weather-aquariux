@@ -53,7 +53,7 @@ const WeatherInfo = ({
 
               <img
                 className="max-lg:w-32 max-lg:h-32 w-48 h-48"
-                src={weatherData.weather[0].main ? cloud : sun}
+                src={weatherData.weather[0].main == "Clouds" ? cloud : sun}
                 alt="sun"
               />
             </div>
