@@ -49,7 +49,7 @@ const WeatherInfo = ({
                     Temperature: {convertTempMin} °C ≈ {convertTempMax} °C
                   </p>
                   <p>Humidity: {weatherData.main.humidity} %</p>
-                  <p>Time: </p>
+                  <p>Time at local position: </p>
                 </div>
               </div>
 

@@ -3,21 +3,21 @@ import HistoryList from "./components/HistoryList";
 import WeatherInfo from "./components/WeatherInfo";
 import { useEffect, useState, useMemo } from "react";
 import { fetchWeatherData } from "./utils/fetchWeatherData";
-import { Nullable } from "./types/types";
+import { HistoryDataType, Nullable } from "./types/types";
 
 function App() {
   const [location, setLocation] = useState<string>("");
   const [weatherData, setWeatherData] = useState<Nullable<any>>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Nullable<string>>(null);
-  const [historyData, setHistoryData] = useState<string[] | null>([]);
+  const [historyData, setHistoryData] = useState<HistoryDataType[] | null>([]);
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const handleSearch = async (location: string) => {
     setLoading(true);
     const trimmedLocation = location.trim();
     const apiKey = process.env.WEATHER_API_KEY;
-
+    const searchTime = new Date().toLocaleString();
 
     if (!trimmedLocation) {
       setError("Please enter location or country");
@@ -30,7 +30,12 @@ function App() {
         setLocation("");
       }
       if (!data) setError(error);
-      if (!error && data) handleHistoryData(data.name);
+      if (!error && data)
+        handleHistoryData({
+          name: data.name,
+          code: data.sys.country,
+          searchedAt: searchTime,
+        });
       setLoading(false);
     }
   };
@@ -40,7 +45,7 @@ function App() {
     setError(null);
   };
 
-  const handleHistoryData = (newItem: string) => {
+  const handleHistoryData = (newItem: HistoryDataType) => {
     if (historyData === null) {
       setHistoryData([newItem]);
     } else {
@@ -61,7 +66,7 @@ function App() {
         weatherData={weatherData}
       />
     ),
-    [weatherData, error, darkMode, loading]
+    [weatherData, error, darkMode]
   );
 
   return (

@@ -31,12 +31,18 @@ export type SearchbarType = {
   darkMode: boolean;
 };
 
-export type HistoryDataType = {
-  historyData: string[] | null;
-  setHistoryData: React.Dispatch<React.SetStateAction<string[] | null>>;
+export type HistoryListType = {
+  historyData: HistoryDataType[] | null;
+  setHistoryData: React.Dispatch<React.SetStateAction<HistoryDataType[] | null>>;
   loading: boolean;
   handleSearch: (name: string) => void;
 };
+
+export type HistoryDataType = {
+  name: string,
+  code: string,
+  searchedAt: string,
+}
 
 export type ButtonType = {
   darkMode: boolean;

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { IoSearchSharp, IoTrashSharp } from "react-icons/io5";
-import { getTimeLocal } from "../utils/getTimeLocal";
-import { HistoryDataType } from "../types/types";
+import { HistoryDataType, HistoryListType } from "../types/types";
 
 const HistoryList = ({
   historyData,
   loading,
   setHistoryData,
   handleSearch,
-}: HistoryDataType) => {
+}: HistoryListType) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -22,8 +21,12 @@ const HistoryList = ({
   };
 
   const handleFindHistory = (target: string) => {
-    const historyLocation = historyData?.find((name) => name === target) || "";
-    handleSearch(historyLocation);
+    if (historyData) {
+      const historyLocation = historyData.find(
+        (data) => data.name === target
+      ) as HistoryDataType;
+      handleSearch(historyLocation.name);
+    }
   };
 
   return (
@@ -34,21 +37,25 @@ const HistoryList = ({
 
       <div className="flex  flex-col h-[80%] justify-between">
         <ol className="h-48 overflow-scroll">
-          {loading ? (
+          {loading && !historyData?.length ? (
             <>Loading ...</>
           ) : (
             <>
               {currentItems &&
-                currentItems.map((name: string, index: number) => (
+                currentItems.map((data: HistoryDataType, index: number) => (
                   <div className="text-lg flex justify-between border-solid border-b-2 mt-5 transition-transform z-50 hover:translate-y-[-5px]">
-                    <li key={index} className="max-lg:text-sm">{name}</li>
-                    <div className="flex gap-1 max-lg:text-sm items-center">
-                      <p>{getTimeLocal(Date.now())}</p>
+                    <li key={index} className="max-lg:text-sm">
+                      {data.name}, {data.code}
+                    </li>
+                    <div className="flex gap-5 max-lg:gap-1 max-lg:text-sm items-center">
+                      <p>{data.searchedAt}</p>
 
                       <div className="flex gap-2">
                         {" "}
                         <div className="w-7 h-7 hover:cursor-pointer bg-slate-200 items-center flex justify-center rounded-full">
-                          <IoSearchSharp onClick={() => handleFindHistory(name)} />
+                          <IoSearchSharp
+                            onClick={() => handleFindHistory(data.name)}
+                          />
                         </div>
                         <div className="w-7 h-7 hover:cursor-pointer bg-slate-200 items-center flex justify-center rounded-full">
                           <IoTrashSharp onClick={() => handleDelete(index)} />
