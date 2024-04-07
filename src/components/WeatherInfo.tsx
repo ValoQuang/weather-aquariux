@@ -1,9 +1,9 @@
 import { convertTemperature } from "../utils/convertTemperature";
-import { IoWarning } from "react-icons/io5";
 import sun from "../assets/sun.png";
 import cloud from "../assets/cloud.png";
 import { WeatherInfoType } from "../types/types";
 import { getTimeData } from "../utils/getTimeData";
+import ErrorMessage from "../ui-shared/ErrorMessage";
 
 const WeatherInfo = ({
   weatherData,
@@ -29,11 +29,7 @@ const WeatherInfo = ({
         <>Loading ...</>
       ) : (
         <>
-          {error && (
-            <div className="bg-red-400 gap-1 items-center flex p-2 rounded-md">
-              <IoWarning /> {error}
-            </div>
-          )}
+          {error && <ErrorMessage error={error} />}
           {/* Display weather information here */}
           {weatherData && !error && (
             <div className="flex justify-between gap-5 p-2">
