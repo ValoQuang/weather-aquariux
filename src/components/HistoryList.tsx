@@ -52,12 +52,12 @@ const HistoryList = ({
 
                       <div className="flex gap-2">
                         {" "}
-                        <div className="w-7 h-7 hover:cursor-pointer bg-slate-200 items-center flex justify-center rounded-full">
+                        <div className="w-7 h-7 hover:bg-slate-300 hover:cursor-pointer bg-slate-200 items-center flex justify-center rounded-full">
                           <IoSearchSharp
                             onClick={() => handleFindHistory(data.name)}
                           />
                         </div>
-                        <div className="w-7 h-7 hover:cursor-pointer bg-slate-200 items-center flex justify-center rounded-full">
+                        <div className="w-7 h-7 hover:bg-slate-300 hover:cursor-pointer bg-slate-200 items-center flex justify-center rounded-full">
                           <IoTrashSharp onClick={() => handleDelete(index)} />
                         </div>
                       </div>
