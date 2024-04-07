@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `npm install`
 
-For testing purpose, I put my API key straight inside the fetchWeatherData.ts
+For testing purpose, I put my API key straight inside the .env.sample
 
 **Note: Feature:!**
 
