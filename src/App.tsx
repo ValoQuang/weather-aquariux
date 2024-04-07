@@ -3,14 +3,13 @@ import HistoryList from "./components/HistoryList";
 import WeatherInfo from "./components/WeatherInfo";
 import { useEffect, useState, useMemo } from "react";
 import { fetchWeatherData } from "./utils/fetchWeatherData";
-
-export type Nullable<T> = T | null;
+import { Nullable } from "./types/types";
 
 function App() {
   const [location, setLocation] = useState<string>("");
   const [weatherData, setWeatherData] = useState<Nullable<any>>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Nullable<any>>(null);
+  const [error, setError] = useState<Nullable<string>>(null);
   const [historyData, setHistoryData] = useState<string[] | null>([]);
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
@@ -18,6 +17,7 @@ function App() {
     setLoading(true);
     const trimmedLocation = location.trim();
     const apiKey = process.env.WEATHER_API_KEY;
+
 
     if (!trimmedLocation) {
       setError("Please enter location or country");

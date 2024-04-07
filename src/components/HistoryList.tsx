@@ -28,7 +28,7 @@ const HistoryList = ({
 
   return (
     <div className="w-full h-full">
-      <div className="text-2xl max-lg:text-xs py-2 border-solid border-b-[1px] border-black font-extrabold">
+      <div className="text-2xl text-center max-lg:text-xs py-2 border-solid border-b-[1px] border-black font-extrabold">
         History
       </div>
 
