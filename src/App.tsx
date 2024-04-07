@@ -66,7 +66,7 @@ function App() {
         weatherData={weatherData}
       />
     ),
-    [weatherData, error, darkMode]
+    [weatherData, error, darkMode, loading]
   );
 
   return (
