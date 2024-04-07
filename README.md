@@ -8,6 +8,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 For testing purpose, I put my API key straight inside the .env.sample
 
+### DEMO LINK
+[DEMO LINK](http://weather-aquariux.s3-website.eu-north-1.amazonaws.com).
+
 **Note: Feature:!**
 
 - User can input city, or country name and find weather information.
