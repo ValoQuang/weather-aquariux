@@ -36,7 +36,7 @@ const WeatherInfo = ({
           )}
           {/* Display weather information here */}
           {weatherData && !error && (
-            <div className="flex justify-between gap-5">
+            <div className="flex justify-between gap-5 p-2">
               <div className="flex flex-col text-sm gap-5">
                 <p>
                   Weather for {weatherData.name}, {weatherData.sys.country}
